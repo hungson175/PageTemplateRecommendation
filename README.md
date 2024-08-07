@@ -68,7 +68,8 @@ This FastAPI project integrates language models and image processing to provide 
 #### Start a Conversation
 - **Endpoint**: `GET /start-conversation`
 - **Method**: GET
-- **Description**: Initiates a new conversation, clearing any existing chat history.
+- **Description**: Initiates a new conversation, clearing any existing chat history. 
+- Should always be called first, or to reset the conversation
 
 **Example Request**:
 ```plaintext
@@ -79,30 +80,6 @@ This FastAPI project integrates language models and image processing to provide 
 {
   "response_code": 0,
   "message": "Initial greeting from the bot..."
-}
-```
-
-#### Send a Customer Message
-- **Endpoint**: `POST /customer-message`
-- **Method**: POST
-- **Body**: `{"content": "Your message here"}`
-- **Description**: Sends a customer message to the server and receives a basic acknowledgment.
-
-**Example Request**:
-```plaintext
-{{base_url}}/customer-message
-```
-**Body**:
-```json
-{
-  "content": "Hi, I need help choosing a template."
-}
-```
-**Example Response**:
-```json
-{
-  "response_code": 0,
-  "message": "Received: Your message here"
 }
 ```
 
@@ -133,7 +110,7 @@ This FastAPI project integrates language models and image processing to provide 
 #### Extract Information from Uploaded Image
 - **Endpoint**: `POST /extract-image-info`
 - **Method**: POST
-- **Body**: `{"url": "URL of the image to analyze"}`
+- **Body**: `{"url": "Local file path of the image - only support local file right now"}`
 - **Description**: Analyzes the image at the provided URL and extracts relevant template information.
 
 **Example Request**:
@@ -143,14 +120,47 @@ This FastAPI project integrates language models and image processing to provide 
 **Body**:
 ```json
 {
-  "url": "http://example.com/image.jpg"
+  "url": "/user/iamuser/download/template_screenshot.png"
 }
 ```
 **Example Response**:
 ```json
 {
+  "response_code": 0, 
+  "message": "Extracted information from the image in json format..."
+}
+```
+
+## Extracting Information from Chat History
+
+### Endpoint: `/extract-chat-info`
+- **Method**: POST
+- **Description**: Analyzes the accumulated chat history to extract key information about the user's preferences regarding page type, style, and industry, which are crucial for template selection.
+
+### Request
+This endpoint does not require any parameters or data to be sent in the body of the request, as it operates directly on the stored chat history.
+
+### Usage with Postman
+1. Ensure your API is up and running as instructed in the "Running the Server" section.
+2. Open Postman and select the "POST" method from the dropdown menu.
+3. Enter the endpoint URL:
+   ```plaintext
+   {{base_url}}/extract-chat-info
+   ```
+4. Since this endpoint does not require a body, you can directly send the request.
+
+### Example Response
+Upon success, the server responds with extracted information categorized by page type, style, and industry, which assists in selecting the appropriate website template. Here's what the response might look like:
+
+```json
+{
   "response_code": 0,
-  "message": "Extracted information from the image..."
+  "message": {
+    "summary": "The customer is looking for a professional and minimalistic design for their new clothing brand.",
+    "page-type": ["Home page", "Product page"],
+    "style": ["Professional", "Minimalist"],
+    "industry": ["Clothing"]
+  }
 }
 ```
 
