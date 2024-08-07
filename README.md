@@ -131,16 +131,16 @@ This FastAPI project integrates language models and image processing to provide 
 }
 ```
 
-## Extracting Information from Chat History
+#### Extracting Information from Chat History
 
-### Endpoint: `/extract-chat-info`
+- **Endpoint**: `/extract-chat-info`
 - **Method**: POST
 - **Description**: Analyzes the accumulated chat history to extract key information about the user's preferences regarding page type, style, and industry, which are crucial for template selection.
 
-### Request
+#### Request
 This endpoint does not require any parameters or data to be sent in the body of the request, as it operates directly on the stored chat history.
 
-### Usage with Postman
+**Usage with Postman**:
 1. Ensure your API is up and running as instructed in the "Running the Server" section.
 2. Open Postman and select the "POST" method from the dropdown menu.
 3. Enter the endpoint URL:
@@ -149,7 +149,7 @@ This endpoint does not require any parameters or data to be sent in the body of 
    ```
 4. Since this endpoint does not require a body, you can directly send the request.
 
-### Example Response
+**Example Response**:
 Upon success, the server responds with extracted information categorized by page type, style, and industry, which assists in selecting the appropriate website template. Here's what the response might look like:
 
 ```json
