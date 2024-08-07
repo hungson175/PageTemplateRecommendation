@@ -17,7 +17,7 @@ This FastAPI project integrates language models and image processing to provide 
 1. **Clone the Repository**:
    - First, clone the repository to your local machine using the command:
      ```bash
-     git clone https://yourrepositorylink.com/project.git
+     git clone https://github.com/hungson175/PageTemplateRecommendation.git
      cd project
      ```
 
@@ -56,10 +56,6 @@ This FastAPI project integrates language models and image processing to provide 
 
 ## Next Steps
 - With your environment set up and running, you're ready to explore the API functionalities as detailed in the API Usage section above using Postman or any other API client.
-
----
-
-These instructions should guide a user through setting up the project locally, including how to manage Python packages and run the application.
 
 ## API Usage with Postman
 ### Setup
@@ -174,8 +170,3 @@ These instructions should guide a user through setting up the project locally, i
   "message": "List of all messages in the chat..."
 }
 ```
-
-## Conclusion
-This API allows seamless interaction between users and an AI to aid in selecting the right website templates based on text or image inputs. For detailed interaction and testing, Postman provides an intuitive interface to manage and execute API calls effectively.
-
----
