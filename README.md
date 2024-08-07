@@ -3,7 +3,7 @@
 This FastAPI project integrates language models and image processing to provide customer support in selecting website templates.
 
 ## Technologies Used
-- **FastAPI**: A modern, fast (high-performance) web framework for building APIs with Python 3.7+ based on standard Python type hints.
+- **FastAPI**: A modern, fast (high-performance) web framework for building APIs with Python 3.11+ based on standard Python type hints.
 - **Langchain**: A framework for chaining language models and other components to create complex conversational applications.
 - **OpenAI GPT-4**: Utilized for natural language understanding and generation, offering sophisticated conversational capabilities.
 
