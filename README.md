@@ -78,11 +78,37 @@ This FastAPI project integrates language models and image processing to provide 
 **Example Response**:
 ```json
 {
-  "response_code": 0,
-  "message": "Initial greeting from the bot..."
+    "response_code": 0,
+    "message": {
+        "question": "Hi",
+        "chat_history": [
+            {
+                "content": "Hi",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "human",
+                "name": null,
+                "id": null,
+                "example": false
+            },
+            {
+                "content": "Hey there! What do you have in mind for your website?",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "ai",
+                "name": null,
+                "id": null,
+                "example": false,
+                "tool_calls": [],
+                "invalid_tool_calls": [],
+                "usage_metadata": null
+            }
+        ],
+        "text": "Hey there! What do you have in mind for your website?"
+    }
 }
 ```
-
+Note: you only have to pay attention the last line "text". It is the response of the bot
 #### Chat with the Bot
 - **Endpoint**: `POST /chat-with-bot`
 - **Method**: POST
@@ -96,14 +122,14 @@ This FastAPI project integrates language models and image processing to provide 
 **Body**:
 ```json
 {
-  "content": "Can you show me some professional templates?"
+	"content": "I want to sell online clothing"
 }
 ```
 **Example Response**:
 ```json
 {
-  "response_code": 0,
-  "message": "Bot's response based on the conversation logic..."
+    "response_code": 0,
+    "message": "That sounds great! Are you looking for a specific type of page, like a Home page, Product page, or Collection page?"
 }
 ```
 
@@ -120,14 +146,27 @@ This FastAPI project integrates language models and image processing to provide 
 **Body**:
 ```json
 {
-  "url": "/user/iamuser/download/template_screenshot.png"
+    "url": "/user/some_user/assets/template_hiut_denim.png"
 }
 ```
 **Example Response**:
 ```json
 {
-  "response_code": 0, 
-  "message": "Extracted information from the image in json format..."
+    "response_code": 0,
+    "message": {
+        "summary": "This website template is designed for a denim clothing brand, showcasing a blend of lifestyle imagery and product displays. It emphasizes a clean and modern aesthetic, making it suitable for brands focused on quality and craftsmanship in apparel. The layout encourages easy navigation and highlights key product offerings.",
+        "page-type": [
+            "Home page",
+            "Product page"
+        ],
+        "style": [
+            "Minimalist",
+            "Professional"
+        ],
+        "industry": [
+            "Clothing"
+        ]
+    }
 }
 ```
 
@@ -180,3 +219,17 @@ Upon success, the server responds with extracted information categorized by page
   "message": "List of all messages in the chat..."
 }
 ```
+
+## Chat flow example:
+1. **Start a conversation:**
+   - `GET /start-conversation`
+2. **Chat with the bot:**
+   - `POST /chat-with-bot` with content: "I want to sell online clothing"
+3. **Extract information from an uploaded image:**
+   - `POST /extract-image-info`
+4. **Chat with the bot:**
+   - `POST /chat-with-bot` with content: "Summarize the uploaded website image so I can be sure you understand it correctly"
+   - `POST /chat-with-bot` with content: "Any more suggestions ?"
+5. **Extract information from chat history:**
+   - `POST /extract-chat-info`
+
